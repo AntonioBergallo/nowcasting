@@ -158,7 +158,11 @@ nowcast <- function(formula, data, r = NULL, q = NULL, p = NULL, method = 'EM', 
     
     if(!is.null(q)){
       message("Obs: for this estimation method the number of common shocks is assumed to be equal to the number of factors, i.e. q = r.")
-      }
+    }
+    
+    # add h lines to the database
+    data <- ts(bind_rows(data, matrix(NA, nrow = h, ncol = ncol(data))),
+                start = start(data), frequency = 12)
 
     # rewrite blocks as matrix
     if(!is.matrix(blocks)){blocks <- as.matrix(blocks)}
@@ -229,7 +233,6 @@ nowcast <- function(formula, data, r = NULL, q = NULL, p = NULL, method = 'EM', 
     
     # Factors and estimated explanatory variables
     factors <- list(dynamic_factors = ts(Res$FF[,idx_factor], start = start(x), frequency = 12))
-    colnames(factors$dynamic_factors) <- as.vector(sapply(X = 1:dim(blocks)[2],FUN = function(X){paste0("Block",X,"_factor",1:r)}))
     
     fore_x <- ts(Res$X_sm, start = start(x), frequency = 12)
     colnames(fore_x) <- colnames(x)
