@@ -61,7 +61,7 @@
 #' @seealso \code{\link[nowcasting]{base_extraction}}
 #' @export
 
-nowcast <- function(formula, data, r = NULL, q = NULL, p = NULL, method = 'EM', blocks = NULL, frequency = NULL){
+nowcast <- function(formula, data, r = NULL, q = NULL, p = NULL, method = 'EM', blocks = NULL, frequency = NULL, h = 1){
   
   # Checking user inputs
     
