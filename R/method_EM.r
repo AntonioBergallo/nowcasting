@@ -21,15 +21,9 @@ remNaNs_spline <-function(X,options){
     
   }else if(options$method == 2){ # replace missing values after removing leading and closing zeros
     
-    rem1 <- (rowSums(indNaN)>N*0.8)
-    nanLead <- which(rem1)
-    # nanEnd <- which(rem1[length(rem1):1])
-    # nanLE <- c(nanEnd,nanLead)
-    nanLE<-nanLead
-    X<-X[-nanLE,]
-    indNaN=is.na(X)
-    for (i in 1:N){  
-      x = X[,i]
+    x <- X %>% 
+      slice_tail
+    
       isnanx = is.na(x)
       t1 = min(which(!isnanx))
       t2 = max(which(!isnanx))
