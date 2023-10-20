@@ -161,7 +161,7 @@ nowcast <- function(formula, data, r = NULL, q = NULL, p = NULL, method = 'EM', 
     }
     
     # add h lines to the database
-    data <- ts(bind_rows(data, matrix(NA, nrow = h, ncol = ncol(data))),
+    data <- ts(rbind(data, matrix(NA, nrow = h, ncol = ncol(data))),
                 start = start(data), frequency = 12)
 
     # rewrite blocks as matrix
