@@ -93,8 +93,10 @@ nowcast <- function(formula, data, r = NULL, q = NULL, p = NULL, method = 'EM', 
   
   if(freq_y == 4){
     y <- month2qtr(ts(k[,1], start = start(data), frequency = 12))
+    y_var <- colnames(k)[1]
   }else{
     y <- ts(k[,1], start = start(data), frequency = 12)
+    y_var = ""
   }  
   
   

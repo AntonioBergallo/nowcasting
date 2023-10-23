@@ -21,7 +21,12 @@ remNaNs_spline <-function(X,options){
     
   }else if(options$method == 2){ # replace missing values after removing leading and closing zeros
     
+    holder <- data[,which(colnames(data) != y_var)] %>% 
+      na.remove
+    
+    X <- X[1:nrow(holder),]
     indNaN=is.na(X)
+    
     for (i in 1:N){  
       x = X[,i]
       isnanx = is.na(x)
