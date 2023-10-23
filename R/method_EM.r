@@ -21,8 +21,8 @@ remNaNs_spline <-function(X,options){
     
   }else if(options$method == 2){ # replace missing values after removing leading and closing zeros
     
- x <- X %>% 
-   drop_na()
+ X <- X %>% 
+   na.remove()
     
   }else if(options$method == 3){ # only remove rows with leading and closing zeros
     
