@@ -22,7 +22,7 @@ remNaNs_spline <-function(X,options){
   }else if(options$method == 2){ # replace missing values after removing leading and closing zeros
     
     X <- X %>% 
-      slice_tail
+      head(-1)
     
     for (i in 1:N){  
       x = X[,i]
