@@ -21,26 +21,8 @@ remNaNs_spline <-function(X,options){
     
   }else if(options$method == 2){ # replace missing values after removing leading and closing zeros
     
-    X <- X %>% 
-      head(-1)
-    
-    for (i in 1:N){  
-      x = X[,i]
-      isnanx = is.na(x)
-      t1 = min(which(!isnanx))
-      t2 = max(which(!isnanx))
-      
-      x1<-stats::spline(x[t1:t2],xout = 1:(t2-t1+1))
-      xx<-x1$y
-      x[t1:t2]<-x1$y
-      isnanx<-is.na(x)
-      x[isnanx] <- median(x,na.rm = T)
-      
-      x_MA<-filter(x = c(rep(x[1],k),x,rep(x[length(x)],k)),filter = rep(1,2*k+1)/(2*k+1),sides = 1)
-      x_MA=x_MA[(2*k+1):length(x_MA)]
-      x[indNaN[,i]]=x_MA[indNaN[,i]]
-      X[,i]=x;
-    }
+ x <- X %>% 
+   drop_na()
     
   }else if(options$method == 3){ # only remove rows with leading and closing zeros
     
