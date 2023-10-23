@@ -21,9 +21,11 @@ remNaNs_spline <-function(X,options){
     
   }else if(options$method == 2){ # replace missing values after removing leading and closing zeros
     
-    x <- X %>% 
+    X <- X %>% 
       slice_tail
     
+    for (i in 1:N){  
+      x = X[,i]
       isnanx = is.na(x)
       t1 = min(which(!isnanx))
       t2 = max(which(!isnanx))
